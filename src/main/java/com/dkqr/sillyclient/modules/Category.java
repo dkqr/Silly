@@ -1,4 +1,4 @@
-package com.dkqr.sillyclient.util;
+package com.dkqr.sillyclient.modules;
 
 public enum Category {
     COMBAT,

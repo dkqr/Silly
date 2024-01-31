@@ -1,5 +1,6 @@
 package com.dkqr.sillyclient;
 
+import com.dkqr.sillyclient.modules.ModuleManager;
 import net.fabricmc.api.ClientModInitializer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -10,5 +11,6 @@ public class SillyClient implements ClientModInitializer {
     @Override
     public void onInitializeClient() {
         LOGGER.info("Starting SillyClient!! :3");
+        ModuleManager mm = new ModuleManager();
     }
 }
