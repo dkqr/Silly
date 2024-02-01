@@ -3,27 +3,30 @@ package com.dkqr.sillyclient.modules;
 import com.dkqr.sillyclient.SillyClient;
 import com.dkqr.sillyclient.modules.cheats.FlyHack;
 import com.dkqr.sillyclient.modules.cheats.NoFallHack;
+import com.dkqr.sillyclient.modules.cheats.SpeedHack;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback;
-import net.minecraft.text.Text;
 import org.lwjgl.glfw.GLFW;
 
 import java.util.ArrayList;
 
 public class ModuleManager {
-    private final ArrayList<Module> modules = new ArrayList<>();
+    public static final ArrayList<Module> modules = new ArrayList<>();
     public Module flyHack = new FlyHack("Fly Hack", Category.MOVEMENT, GLFW.GLFW_KEY_G);
     public Module noFallHack = new NoFallHack("NoFall Hack", Category.MOVEMENT, GLFW.GLFW_KEY_H);
+    public Module speedHack = new SpeedHack("Speed Hack", Category.MOVEMENT, GLFW.GLFW_KEY_C);
 
     public ModuleManager() {
         addModule(flyHack);
         addModule(noFallHack);
+        addModule(speedHack);
+
         HudRenderCallback.EVENT.register((drawContext, tickDelta) -> {
-            int offset = 1;
+            int offset = 2;
             for (Module mod : modules) {
                 if (mod.getState()) {
-                    drawContext.drawText(SillyClient.client.textRenderer, mod.getName(), 1, offset, 0xffffff, false);
-                    offset += 9;
+                    drawContext.drawText(SillyClient.client.textRenderer, mod.getName(), 2, offset, 0xffffff, true);
+                    offset += 10;
                 }
             }
         });
@@ -35,7 +38,6 @@ public class ModuleManager {
                     mod.keyPressed = true;
                     if (client.player != null) {
                         mod.toggle();
-                        //client.player.sendMessage(Text.of("[" + mod.getName() + "] " + (mod.getState() ? "On" : "Off")));
                     }
                 } else {
                     mod.keyPressed = false;
