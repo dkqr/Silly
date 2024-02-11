@@ -9,11 +9,13 @@ public class SpeedHack extends Module {
         super(name, category, keycode);
     }
     public void onTick() {
+        // should probably do in a better way
+        // I mean this kinda works but is mostly crap
         if (client.player.isSneaking() || client.player.forwardSpeed == 0 && client.player.sidewaysSpeed == 0)
             return;
         if (!client.player.isOnGround())
             return;
-        Vec3d plrVel = client.player.getVelocity();
-        client.player.setVelocity(plrVel.x * 1.8, 0.5, plrVel.z * 1.8);
+        Vec3d plrVel = client.player.getVelocity().multiply(2, 0, 2);
+        client.player.setVelocity(plrVel.x, 0.4, plrVel.z);
     }
 }
