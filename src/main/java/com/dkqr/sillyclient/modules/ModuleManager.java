@@ -2,6 +2,7 @@ package com.dkqr.sillyclient.modules;
 
 import com.dkqr.sillyclient.SillyClient;
 import com.dkqr.sillyclient.modules.cheats.FlyHack;
+import com.dkqr.sillyclient.modules.cheats.KillAura;
 import com.dkqr.sillyclient.modules.cheats.NoFallHack;
 import com.dkqr.sillyclient.modules.cheats.SpeedHack;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
@@ -15,11 +16,13 @@ public class ModuleManager {
     public Module flyHack = new FlyHack("Fly Hack", Category.MOVEMENT, GLFW.GLFW_KEY_G);
     public Module noFallHack = new NoFallHack("NoFall Hack", Category.MOVEMENT, GLFW.GLFW_KEY_H);
     public Module speedHack = new SpeedHack("Speed Hack", Category.MOVEMENT, GLFW.GLFW_KEY_C);
+    public Module killAura = new KillAura("KillAura Hack", Category.COMBAT, GLFW.GLFW_KEY_X);
 
     public ModuleManager() {
         addModule(flyHack);
         addModule(noFallHack);
         addModule(speedHack);
+        addModule(killAura);
 
         HudRenderCallback.EVENT.register((drawContext, tickDelta) -> {
             int offset = 2;
