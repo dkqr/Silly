@@ -2,6 +2,7 @@ package com.dkqr.sillyclient.mixin;
 
 import com.dkqr.sillyclient.SillyClient;
 import com.dkqr.sillyclient.screens.HackSelectScreen;
+import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.GameMenuScreen;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.widget.ButtonWidget;
@@ -14,6 +15,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
+import java.awt.*;
 import java.util.function.Supplier;
 
 @Mixin(GameMenuScreen.class)

@@ -1,13 +1,17 @@
 package com.dkqr.sillyclient.screens;
 
 import com.dkqr.sillyclient.SillyClient;
+import com.dkqr.sillyclient.modules.Category;
 import com.dkqr.sillyclient.modules.Module;
 import com.dkqr.sillyclient.modules.ModuleManager;
+import com.dkqr.sillyclient.util.ColourUtils;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.widget.ButtonWidget;
 import net.minecraft.text.Text;
+
+import java.awt.*;
 
 public class HackSelectScreen extends Screen {
     public HackSelectScreen(Text title) {
@@ -15,7 +19,7 @@ public class HackSelectScreen extends Screen {
     }
     @Override
     public void init() {
-        int offset = 0;
+        /*int offset = 0;
         for (Module mod : ModuleManager.modules) {
             int x = offset % 2 == 0 ? width / 3 - 50 : width*2 / 3 - 50;
             //int y = (int) (Math.floor((double) offset /2) * height / 3) + 20;
@@ -24,10 +28,16 @@ public class HackSelectScreen extends Screen {
                 mod.toggle();
             }).dimensions(x, y, 100, 20).build());
             offset += 1;
-        }
+        }*/
     }
     public void render(DrawContext context, int mouseX, int mouseY, float delta) {
         super.render(context, mouseX, mouseY, delta);
-        renderBackground(context);
+        int offset = 0;
+        for (Category cate : Category.values()) {
+            System.out.println(offset);
+            context.fill(40 * (offset * 8 + 1), 40, 120, 80, Color.WHITE.getRGB());
+            offset++;
+        }
+        //renderBackground(context);
     }
 }
