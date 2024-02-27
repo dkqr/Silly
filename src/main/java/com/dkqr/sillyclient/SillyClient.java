@@ -12,7 +12,7 @@ public class SillyClient implements ClientModInitializer {
     public static MinecraftClient client = MinecraftClient.getInstance();
     @Override
     public void onInitializeClient() {
-        LOGGER.info("Starting SillyClient!! :3");
+        LOGGER.info("Starting SillyClient!!");
         ModuleManager mm = new ModuleManager();
     }
 }

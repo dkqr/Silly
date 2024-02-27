@@ -5,17 +5,15 @@ import com.dkqr.sillyclient.modules.cheats.FlyHack;
 import com.dkqr.sillyclient.modules.cheats.KillAura;
 import com.dkqr.sillyclient.modules.cheats.NoFallHack;
 import com.dkqr.sillyclient.modules.cheats.SpeedHack;
-import com.dkqr.sillyclient.screens.HackSelectScreen;
+import com.dkqr.sillyclient.gui.screens.HackSelectScreen;
 import com.dkqr.sillyclient.util.ColourUtils;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
 import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback;
 import net.minecraft.client.option.KeyBinding;
-import net.minecraft.client.util.InputUtil;
 import net.minecraft.text.Text;
 import org.lwjgl.glfw.GLFW;
 
-import java.awt.*;
 import java.util.ArrayList;
 
 public class ModuleManager {
