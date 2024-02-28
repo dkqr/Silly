@@ -5,12 +5,15 @@ import com.dkqr.sillyclient.modules.cheats.FlyHack;
 import com.dkqr.sillyclient.modules.cheats.KillAura;
 import com.dkqr.sillyclient.modules.cheats.NoFallHack;
 import com.dkqr.sillyclient.modules.cheats.SpeedHack;
+import com.dkqr.sillyclient.gui.screens.HackSelectScreen;
 import com.dkqr.sillyclient.util.ColourUtils;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
+import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
 import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback;
+import net.minecraft.client.option.KeyBinding;
+import net.minecraft.text.Text;
 import org.lwjgl.glfw.GLFW;
 
-import java.awt.*;
 import java.util.ArrayList;
 
 public class ModuleManager {
@@ -20,6 +23,7 @@ public class ModuleManager {
     public Module speedHack = new SpeedHack("Speed Hack", Category.MOVEMENT, GLFW.GLFW_KEY_C);
     public Module killAura = new KillAura("KillAura Hack", Category.COMBAT, GLFW.GLFW_KEY_X);
     public int curColour = 0xffffff;
+    KeyBinding modOpen = KeyBindingHelper.registerKeyBinding(new KeyBinding("Open mod", GLFW.GLFW_KEY_RIGHT_SHIFT, SillyClient.MODID));
 
     public ModuleManager() {
         addModule(flyHack);
@@ -40,6 +44,8 @@ public class ModuleManager {
             }
         });
         ClientTickEvents.START_CLIENT_TICK.register(client -> {
+            if (modOpen.isPressed())
+                client.setScreen(new HackSelectScreen(Text.literal("Hack Select")));
             for (Module mod : modules) {
                 if (mod.getKeybind().isPressed()) {
                     if (mod.keyPressed)
