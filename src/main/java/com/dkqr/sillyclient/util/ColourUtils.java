@@ -14,7 +14,6 @@ public class ColourUtils {
         int red = colour.getRed() << 16;
         int blue = colour.getBlue() << 8;
         int green = colour.getGreen();
-        int rgb = red | blue | green;
-        return rgb;
+        return red | blue | green;
     }
 }

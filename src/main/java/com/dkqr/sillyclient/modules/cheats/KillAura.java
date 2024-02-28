@@ -26,7 +26,7 @@ public class KillAura extends Module {
         ArrayList<Entity> targets = new ArrayList<>();
         client.world.getEntities().forEach(entity -> {
             if (entity == client.player) return;
-            if (client.player.distanceTo(entity) < 4 && entity.canHit() && client.player.getAttackCooldownProgress(0.0f) == 1.0f) {
+            if (client.player.distanceTo(entity) < 4 && entity.canHit() && client.player.getAttackCooldownProgress(0) == 1 && ((LivingEntity) entity).getHealth() > 0) {
                 //SillyClient.LOGGER.info(entity.getDisplayName().getString());
                 targets.add(entity);
             }
