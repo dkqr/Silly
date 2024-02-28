@@ -11,6 +11,7 @@ import net.minecraft.client.gui.widget.ButtonWidget;
 import net.minecraft.text.Text;
 import org.lwjgl.glfw.GLFW;
 
+import java.awt.*;
 import java.util.ArrayList;
 
 public class HackSelectScreen extends Screen {
@@ -20,6 +21,7 @@ public class HackSelectScreen extends Screen {
     private int prevMouse;
     private int lastX;
     private int lastY;
+    private boolean curDrag;
 
     private ArrayList<Frame> frames = new ArrayList<>();
     @Override
@@ -36,7 +38,9 @@ public class HackSelectScreen extends Screen {
         }*/
         for (Category cate : Category.values()) {
             int offset = (120 * cate.ordinal());
-            frames.add(new Frame(40 + offset, 40, 120 + offset, 80, "A"));
+            Frame f = new Frame(40 + offset, 40, 120 + offset, 80, Color.WHITE.getRGB());
+            f.addChild(new Frame(f.x1, f.y1 + 30, f.x2, f.y2 + 30, Color.BLACK.getRGB()));
+            frames.add(f);
         }
     }
 
@@ -58,12 +62,25 @@ public class HackSelectScreen extends Screen {
                 }
             } else {
                 for (Frame f : frames) {
-                    if (f.isDraggable()) {
-
+                    if (f.isDraggable() && f.dragging) {
+                        int xOffset = f.x1 + (mouseX - lastX);
+                        f.setX(xOffset);
+                        int yOffset = f.y1 + (mouseY - lastY);
+                        f.setY(yOffset);
+                        break;
+                    } else if (mouseX >= f.x1 && mouseY >= f.y1 && mouseX <= f.x2 && mouseY <= f.y2 && !curDrag) {
+                        f.dragging = true;
+                        curDrag = true;
+                        break;
                     }
                 }
                 lastX = mouseX;
                 lastY = mouseY;
+            }
+        } else {
+            for (Frame f : frames) {
+                f.dragging = false;
+                curDrag = false;
             }
         }
         prevMouse = GLFW.glfwGetMouseButton(client.getWindow().getHandle(), GLFW.GLFW_MOUSE_BUTTON_1);
