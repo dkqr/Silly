@@ -64,9 +64,13 @@ public class HackSelectScreen extends Screen {
                 for (Frame f : frames) {
                     if (f.isDraggable() && f.dragging) {
                         int xOffset = f.x1 + (mouseX - lastX);
-                        f.setX(xOffset);
+                        if (xOffset < 0) xOffset = 0;
+                        if (mouseX < client.getWindow().getWidth())
+                            f.setX(xOffset);
                         int yOffset = f.y1 + (mouseY - lastY);
-                        f.setY(yOffset);
+                        if (yOffset < 0) yOffset = 0;
+                        if (mouseY < client.getWindow().getHeight())
+                            f.setY(yOffset);
                         break;
                     } else if (mouseX >= f.x1 && mouseY >= f.y1 && mouseX <= f.x2 && mouseY <= f.y2 && !curDrag) {
                         f.dragging = true;
