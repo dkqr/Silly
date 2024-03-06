@@ -8,8 +8,8 @@ public class Gui {
     public int x1,y1,x2,y2,colour;
     public int width,height;
     public boolean dragging = false;
-    private ArrayList<Gui> children = new ArrayList<>();
-    private Gui parent;
+    protected ArrayList<Gui> children = new ArrayList<>();
+    protected Gui parent;
     public Gui(int x1, int y1, int x2, int y2, int colour) {
         this.x1 = x1;
         this.y1 = y1;
@@ -19,19 +19,20 @@ public class Gui {
         this.width = x2 - x1;
         this.height = y2 - y1;
     }
+
     public void setX(int x) {
+        this.x1 = x;
+        this.x2 = x + width;
         for (Gui c : children) {
             c.setX(x);
         }
-        this.x1 = x;
-        this.x2 = x + width;
     }
     public void setY(int y) {
-        for (Gui c : children) {
-            c.setY(y);
-        }
         this.y1 = y;
         this.y2 = y + height;
+        for (Gui c : children) {
+            c.setY(y + c.height);
+        }
     }
     public void setParent(Gui gui) {
         parent = gui;
@@ -44,10 +45,16 @@ public class Gui {
         return children;
     }
 
-    public void onPress() {
+    public void onPress(int mouse) {
 
+    }
+    public boolean isDraggable() {
+        return false;
     }
     public void draw(DrawContext context) {
         context.fill(x1,y1,x2,y2, colour);
+        for (Gui g : getChildren()) {
+            g.draw(context);
+        }
     }
 }
