@@ -30,8 +30,8 @@ public class HackSelectScreen extends Screen {
         for (Category cate : Category.values()) {
             int offset = (120 * cate.ordinal());
             Frame f = new Frame(40 + offset, 40, 120 + offset, 70, Color.GRAY.getRGB(), cate.name());
-            f.addChild(new Option(f.x1, f.y1 + 30, f.x2, f.y2 + 30, Color.BLACK.getRGB(), "AAA"));
-            f.addChild(new Option(f.x1, f.y1, f.x2, f.y2, Color.BLACK.getRGB(), "AAAB"));
+            f.addChild(new Option(f.x1, f.y1 + 30, f.x2, f.y2 + 30, Color.BLACK.getRGB(), "AAAQ"));
+            f.addChild(new Option(f.x1, f.y1 + 60 , f.x2, f.y2 + 60, Color.BLACK.getRGB(), "AAAB"));
             frames.add(f);
         }
     }
