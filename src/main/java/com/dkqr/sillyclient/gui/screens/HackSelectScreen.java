@@ -4,6 +4,8 @@ import com.dkqr.sillyclient.SillyClient;
 import com.dkqr.sillyclient.gui.Frame;
 import com.dkqr.sillyclient.gui.Option;
 import com.dkqr.sillyclient.modules.Category;
+import com.dkqr.sillyclient.modules.Module;
+import com.dkqr.sillyclient.modules.ModuleManager;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.Screen;
@@ -29,9 +31,14 @@ public class HackSelectScreen extends Screen {
         frames.clear();
         for (Category cate : Category.values()) {
             int offset = (120 * cate.ordinal());
-            Frame f = new Frame(40 + offset, 40, 120 + offset, 70, Color.GRAY.getRGB(), cate.name());
-            f.addChild(new Option(f.x1, f.y1 + 30, f.x2, f.y2 + 30, Color.BLACK.getRGB(), "AAAQ"));
-            f.addChild(new Option(f.x1, f.y1 + 60 , f.x2, f.y2 + 60, Color.BLACK.getRGB(), "AAAB"));
+            Frame f = new Frame(40 + offset, 40, 120 + offset, 70, Color.GRAY.getRGB(), cate.name(), cate);
+            int oOffset = 30;
+            for (Module m : ModuleManager.modules) {
+                if (m.getCategory() == cate) {
+                    f.addChild(new Option(f.x1, f.y1 + oOffset, f.x2, f.y2 + oOffset, m.getState() ? Color.GRAY.getRGB() : Color.BLACK.getRGB(), m.getName()));
+                    oOffset += 30;
+                }
+            }
             frames.add(f);
         }
     }
